@@ -88,3 +88,100 @@ Represents bank accounts held by customers.
 | status	|	STRING |	Active / Dormant |
 
 ---
+## 🏢 3. BRANCHES (Reference Table)
+
+Represents physical bank locations.
+
+### Primary Key
+* branch_id
+
+### Fields
+| Column	| Type | Description |
+| --- | --- | --- | 
+| branch_id	| INT	| Unique branch ID |
+| transit_number	| STRING	| Branch routing number |
+| branch_name	| STRING	| Branch name |
+| address	| STRING	| Physical address |
+| city	| STRING	| Vancouver |
+| province	| STRING	| BC |
+| foot_traffic_level	| STRING	| Low / Medium / High |
+| is_flagship	| BOOLEAN	| Flagship branch indicator |
+
+---
+
+## 💰 4. TRANSACTIONS (Fact Table)
+
+Core behavioral dataset capturing all banking activity.
+
+### Primary Key
+* transaction_id
+
+### Foreign Keys
+* customer_id → CUSTOMERS
+* account_id → ACCOUNTS
+* branch_id → BRANCHES
+
+### Fields
+| Column	| Type | Description |
+| --- | --- | --- | 
+| transaction_id	| INT	| Unique transaction | 
+| transaction_datetime	| DATETIME	Timestamp | 
+| customer_id	| INT	| Customer reference | 
+| account_id	| INT	| Account reference | 
+| branch_id	| INT	| Branch (if applicable) | 
+| channel	| STRING	| Online / ATM / Branch / Phone | 
+| transaction_type	| STRING	| Action type | 
+| transaction_category	| STRING	| Financial / Service | 
+| amount	| FLOAT	| Monetary value (nullable) | 
+| account_type_used	| STRING	| If applicable | 
+| success_flag	| BOOLEAN	| Transaction success | 
+| duration_minutes	| FLOAT	| Interaction duration | 
+| is_holiday	| BOOLEAN	| Holiday indicator | 
+| weather_event	| STRING	| Weather condition | 
+| sports_event	| STRING	| Sports/game impact | 
+| pandemic_phase	| STRING	| Time period classification | 
+
+
+### Transaction Types
+
+**Financial**
+* cash_in
+* cash_out
+* bill_payment
+* credit_card_payment
+* loan_payment
+* draft_purchase
+* transfer
+
+**Service / Administrative** 
+* password_reset
+* address_change
+* debit_card_replacement
+* cheque_order
+* statement_request
+* direct_deposit_setup
+* appointment_booking
+
+---
+
+## 🧠 5. CUSTOMER BEHAVIOR PROFILE (Simulation Layer)
+
+Used only for synthetic data generation (NOT for ML training).
+
+### Primary Key
+* customer_id
+* Fields
+
+| Column	| Type | Description |
+| --- | --- | --- | 
+| customer_id	| INT	| Customer reference | 
+| behavioral_segment	| STRING	| Customer archetype | 
+| digital_confidence	| FLOAT	| 0–100 | 
+| branch_preference_score	| FLOAT	| 0–100 | 
+| atm_preference_score	| FLOAT	| 0–100 | 
+| mobile_app_usage_probability	| FLOAT	| 0–1 | 
+| financial_literacy_score	| FLOAT	| 0–100 | 
+| accessibility_needs_flag	| BOOLEAN	| Support requirement | 
+
+---
+
