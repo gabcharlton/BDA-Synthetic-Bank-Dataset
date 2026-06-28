@@ -34,6 +34,8 @@ BRANCHES ────────────────┐
 EXTERNAL_EVENTS ────────(joined via date/time)
 ```
 
+---
+
 ## 👤 1. CUSTOMERS (Dimension Table)
 
 Represents individual bank clients.
@@ -59,3 +61,30 @@ Represents individual bank clients.
 | home_branch_id	| INT |	FK → BRANCHES |
 | high_value_client	| BOOLEAN |	Net worth > $500,000 |
 | digital_adoption_score	| FLOAT |	(0–100) target variable |
+
+---
+
+## 💳 2. ACCOUNTS (Dimension Table)
+
+Represents bank accounts held by customers.
+
+### Primary Key
+* account_id
+* Foreign Keys
+* customer_id → CUSTOMERS
+* transit_number → BRANCHES
+
+### Fields
+| Column	| Type | Description |
+| --- | --- | --- | 
+| account_id	|	INT |	Unique account ID |
+| customer_id	|	INT |	Account owner |
+| account_type	|	STRING |	Chequing, Savings, Credit, etc. |
+| opened_date	|	DATE |	Account creation date |
+| transit_number	|	STRING |	Branch identifier |
+| account_number	|	STRING |	Synthetic account number |
+| current_balance	|	FLOAT |	Simulated balance |
+| currency	|	STRING |	CAD / USD |
+| status	|	STRING |	Active / Dormant |
+
+---
