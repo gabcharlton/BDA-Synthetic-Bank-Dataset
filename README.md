@@ -206,7 +206,7 @@ Used to model real-world influences on banking behavior.
 ### Pandemic Phases
 
 | Period	| Label |
-| --- | --- | --- | 
+| --- | --- |  
 | 2019	| pre_pandemic |
 | 2020	| lockdown_transition |
 | 2021	| hybrid_recovery |
