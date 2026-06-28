@@ -185,3 +185,61 @@ Used only for synthetic data generation (NOT for ML training).
 
 ---
 
+## 🌍 6. EXTERNAL EVENTS (Time-Based Context Table)
+
+Used to model real-world influences on banking behavior.
+
+### Primary Key
+* event_date
+* Fields
+
+| Column	| Type | Description |
+| --- | --- | --- | 
+| event_date	| DATE	| Calendar date |
+| is_holiday	| BOOLEAN	| Public holiday |
+| holiday_name	| STRING	| Holiday label |
+| weather_event	| STRING	| Snow, rainstorm, windstorm |
+| weather_severity	| INT	| Scale 1–5 |
+| sports_event	| STRING	| NHL / concert / none |
+| pandemic_phase	| STRING	| Pre / lockdown / recovery / post |
+
+### Pandemic Phases
+
+| Period	| Label |
+| --- | --- | --- | 
+| 2019	| pre_pandemic |
+| 2020	| lockdown_transition |
+| 2021	| hybrid_recovery |
+| 2022–2024	| post_pandemic_normalization |
+
+---
+
+## 🔗 Relationships Summary
+* One-to-Many
+* Customers → Accounts
+* Customers → Transactions
+* Accounts → Transactions
+* Branches → Transactions
+* Time-Based Joins
+* Transactions ↔ External Events (via date/time)
+
+---
+
+## 📊 Design Intent
+
+This schema is designed to support:
+
+* Behavioral modeling of digital banking adoption
+* Branch vs digital channel analysis
+* Customer segmentation
+* Time-series analysis (2019–2024)
+* External event impact modeling
+* Explainable machine learning (XAI-ready structure)
+
+---
+
+## ⚙️ Notes on Data Generation
+* Customer behavior is driven by hidden synthetic profiles
+* External events modify probabilities of transaction types
+* Pandemic phases shift channel preferences over time
+* Seasonality (holidays, weather, sports) affects transaction volume and type
